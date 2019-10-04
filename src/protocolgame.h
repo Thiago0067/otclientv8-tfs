@@ -325,6 +325,33 @@ class ProtocolGame final : public Protocol
 
 		bool debugAssertSent = false;
 		bool acceptPackets = false;
+                
+        // OTClientV8
+        void parseNewPing(NetworkMessage& msg);
+		void parseChangeAwareRange(NetworkMessage& msg);
+        void parseNewWalking(NetworkMessage& msg);
+        
+        void updateAwareRange(int width, int height);
+        
+        void sendNewPing(uint32_t pingId);
+        void sendAwareRange();
+        void sendNewCancelWalk();
+
+        bool otclientV8 = false;        
+
+        struct AwareRange {
+			int width = 17;
+			int height = 13;
+            
+            int left() const { return width / 2; }
+            int right() const { return 1 + width / 2; }
+            int top() const { return height / 2; }
+            int bottom() const { return 1 + height / 2; }
+            int horizontal() const { return width + 1; }
+            int vertical() const { return height + 1; }
+		} awareRange;
+
+        uint32_t walkId = 0;
 };
 
 #endif

@@ -173,10 +173,10 @@ class QTreeLeafNode final : public QTreeNode
 class Map
 {
 	public:
-		static constexpr int32_t maxViewportX = 11; //min value: maxClientViewportX + 1
-		static constexpr int32_t maxViewportY = 11; //min value: maxClientViewportY + 1
-		static constexpr int32_t maxClientViewportX = 8;
-		static constexpr int32_t maxClientViewportY = 6;
+		static constexpr int32_t maxViewportX = 11 + 4; //min value: maxClientViewportX + 1
+		static constexpr int32_t maxViewportY = 11 + 4; //min value: maxClientViewportY + 1
+		static constexpr int32_t maxClientViewportX = 8 + 4;
+		static constexpr int32_t maxClientViewportY = 6 + 4;
 
 		uint32_t clean() const;
 
@@ -251,7 +251,7 @@ class Map
 
 		const Tile* canWalkTo(const Creature& creature, const Position& pos) const;
 
-		bool getPathMatching(const Creature& creature, std::forward_list<Direction>& dirList,
+		bool getPathMatching(const Creature& creature, std::list<Direction>& dirList,
 		                     const FrozenPathingConditionCall& pathCondition, const FindPathParams& fpp) const;
 
 		std::map<std::string, Position> waypoints;
